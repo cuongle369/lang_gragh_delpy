@@ -149,7 +149,7 @@ class UpdateMemory(TypedDict):
 # model = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
 
 model = ChatGoogleGenerativeAI(
-    model="gemini-1.5-pro",
+    model="gemini-1.5-flash",
     temperature=0,
     google_api_key=os.environ["GOOGLE_API_KEY"]  # Lấy từ Render env var
 )
