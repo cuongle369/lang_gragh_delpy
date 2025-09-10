@@ -12,6 +12,11 @@ app = FastAPI()
 # Tạo store in-memory
 store = InMemoryStore()
 
+@app.get("/")
+async def root():
+    return {"message": "Task Maestro API is running!"}
+
+
 @app.post("/chat")
 async def chat(request: Request):
     data = await request.json()
