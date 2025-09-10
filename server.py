@@ -12,7 +12,7 @@ app = FastAPI()
 # Tạo store in-memory
 store = InMemoryStore()
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 async def root():
     return {"message": "Task Maestro API is running!"}
 
