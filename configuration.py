@@ -1,17 +1,14 @@
-import os
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass, fields
 from typing import Any, Optional
-
 from langchain_core.runnables import RunnableConfig
-from typing_extensions import Annotated
-from dataclasses import dataclass
+import os
 
 @dataclass(kw_only=True)
 class Configuration:
     """The configurable fields for the chatbot."""
     user_id: str = "default-user"
     todo_category: str = "general" 
-    task_maistro_role: str = "You are a helpful task management assistant. You help you create, organize, and manage the user's ToDo list."
+    task_maistro_role: str = "You are a helpful task management assistant. You help create, organize, and manage the user's ToDo list."
 
     @classmethod
     def from_runnable_config(
@@ -27,3 +24,7 @@ class Configuration:
             if f.init
         }
         return cls(**{k: v for k, v in values.items() if v})
+
+    def to_runnable_config(self) -> RunnableConfig:
+        """Convert Configuration instance to RunnableConfig."""
+        return {"configurable": {f.name: getattr(self, f.name) for f in fields(self)}}
