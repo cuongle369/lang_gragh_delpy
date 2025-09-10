@@ -422,3 +422,9 @@ builder.add_edge("update_instructions", "task_mAIstro")
 
 # Compile the graph
 graph = builder.compile()
+
+# define graph
+graph = StateGraph(...).compile()
+
+# define global store
+store = InMemoryStore()
