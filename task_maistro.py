@@ -12,7 +12,11 @@ from langchain_core.messages import merge_message_runs
 from langchain_core.messages import SystemMessage, HumanMessage
 
 # from langchain_openai import ChatOpenAI
-from langchain.chat_models import init_chat_model
+# from langchain.chat_models import init_chat_model
+import os
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+
 
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import StateGraph, MessagesState, START, END
@@ -142,7 +146,13 @@ class UpdateMemory(TypedDict):
 # model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 
-model = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
+# model = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
+
+model = ChatGoogleGenerativeAI(
+    model="gemini-1.5-pro",
+    temperature=0,
+    google_api_key=os.environ["GOOGLE_API_KEY"]  # Lấy từ Render env var
+)
 
 
 ## Create the Trustcall extractors for updating the user profile and ToDo list
