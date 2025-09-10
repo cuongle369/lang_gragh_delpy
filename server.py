@@ -1,15 +1,20 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from task_maistro import graph  # graph bạn đã build ở task_maistro.py
+from task_maistro import builder   # 👈 import builder thay vì graph
+from langgraph.store.memory import InMemoryStore
 
 app = FastAPI()
+
+# Tạo store in-memory
+store = InMemoryStore()
+graph = builder.compile(store=store)
 
 # Health check
 @app.get("/")
 def root():
     return {"status": "ok", "message": "LangGraph is running"}
 
-# Input schema cho endpoint /invoke
+# Input schema
 class GraphInput(BaseModel):
     messages: list[dict]
 
