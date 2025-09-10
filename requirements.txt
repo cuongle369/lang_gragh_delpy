@@ -1,5 +1,22 @@
+# Core LangGraph + LangChain
 langgraph
 langchain-core
 langchain-community
 langchain-openai
+
+# Trustcall
 trustcall
+
+# Schema & validation
+pydantic>=2.0
+
+# Web server
+fastapi
+uvicorn
+
+# Env config
+python-dotenv
+
+# (Optional - nếu muốn Redis + Postgres sau này)
+redis
+psycopg2-binary
