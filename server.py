@@ -15,6 +15,11 @@ class GraphInput(BaseModel):
 
 @app.post("/invoke")
 def invoke_graph(data: GraphInput):
-    # Chuyển input thành dict để graph xử lý
-    result = graph.invoke({"messages": data.messages})
-    return result
+    try:
+        result = graph.invoke(
+            {"messages": data.messages},
+            config={"configurable": {"user_id": "default-user"}}
+        )
+        return result
+    except Exception as e:
+        return {"error": str(e)}
